@@ -11,7 +11,7 @@
 | 3 | **Workspace entitlement** | You can create and run notebooks. |
 | 4 | **Databricks SQL entitlement** | You can access SQL / run queries (needed to create tables and Genie Agents). |
 | 5 | **A running SQL warehouse** | A **Serverless** or **Pro** SQL warehouse you can use (`CAN USE`). Genie requires Pro/Serverless. |
-| 6 | **Unity Catalog privileges** | In some catalog/schema you can `CREATE TABLE`, `CREATE VOLUME`, and `CREATE FUNCTION`. |
+| 6 | **Unity Catalog privileges** | In **your own schema** in the shared **`containerunitycatalog`** catalog, you can `CREATE TABLE`, `CREATE VOLUME`, and `CREATE FUNCTION`. By default the workshop uses a schema named after your login (e.g. `ashish.arun@…` → `ashish_arun`). |
 | 7 | **Genie enabled** | The workspace has **Genie / Genie Agents** enabled (ask your admin if unsure). |
 | 8 | **Serverless notebook compute** (or a UC‑enabled cluster) | You can attach a notebook to compute. |
 
@@ -22,15 +22,14 @@
 2. **Import the workshop assets** into your workspace so the folders sit side‑by‑side:
    ```
    /Workspace/Users/<your_email>/genie-agents-workshop/
-     notebooks/     ← workshop notebooks (00–12, incl. 03b)
+     notebooks/     ← workshop notebooks (00–06, 08)
      templates/     ← Genie Agent configuration
-     skill/         ← Genie Code skill file
    ```
-3. **Open `00_workshop_config`** and set your **catalog** and **schema** (a sandbox catalog/schema you can write to).
+3. **Open `00_workshop_config`** and check the **catalog** (`containerunitycatalog`) and **schema** (defaults to your login name). If your schema has a different name, change the **Schema** widget.
 
 ## During & after the session
 - You'll create Genie Agents and supporting tables in **your own sandbox**.
-- **Clean up when you're done.** Run the final **cleanup notebook (`12_cleanup`)** to delete the agents, metric view, tables, and volume you created. *Bring your sandbox; be prepared to destroy the space once done.*
+- **Clean up when you're done.** This version doesn't include a cleanup notebook. Delete your two Genie agents (Baseline and Knowledge Store) from the Genie UI. Drop the workshop tables in your schema only if your platform team asks you to.
 
 ## Quick self‑test (optional)
 In a notebook, run:

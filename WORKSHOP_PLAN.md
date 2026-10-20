@@ -1,6 +1,8 @@
-# Genie Agents Workshop — Facilitator Plan
+# Genie Agents Workshop — Facilitator Plan (GMF 2‑hour version)
 
-A 4‑hour, hands‑on workshop that teaches attendees to **build, curate, evaluate, and operate a production‑ready Databricks Genie Agent** on manufacturing quality data — and to know when *not* to use one. This document is the facilitator's plan and a distilled best‑practices reference; the runnable content lives in `notebooks/`.
+A 2‑hour, hands‑on workshop that teaches attendees to **build, curate, evaluate, and operate a production‑ready Databricks Genie Agent** on manufacturing quality data — and to know when *not* to use one. This document is the facilitator's plan and a distilled best‑practices reference; the runnable content lives in `notebooks/`.
+
+> **GMF version.** GMF is an independent GM subsidiary with its own environment rules. This branch (`gmf_workshop_version`) keeps notebooks **00–06 and 08**. It drops 03b (metric views), 07 (Genie Code skills), 09 (security), 10 (monitoring), 11 (CI/CD), and 12 (cleanup), and builds **two** agents (Baseline and Knowledge Store) instead of three. Participants share the **`containerunitycatalog`** catalog, and each person gets a schema named after their login (e.g. `ashish_arun`). The full 4‑hour version is on `main`.
 
 > Terminology: **Genie Spaces** were renamed **Genie Agents**. This repo uses "Genie Agent" in prose; code identifiers, REST paths (`/api/2.0/genie/spaces`), and the `serialized_space` field keep their original names.
 
@@ -21,7 +23,7 @@ The point of the session is **not** "add tables to Genie and watch it do magic."
 - **~100 attendees, mixed:** data/technical **builders** plus **business consumers**; some new to Databricks. Design for two tracks in one room:
   - **Builders** — create and curate the agent (the hands‑on core).
   - **Consumers** — learn to *use* the agent and to feed quality signals back (thumbs up/down, request‑review, suggested questions). Their feedback is the reinforcement loop that improves agents.
-- **4 hours, remote/virtual, two breaks.** **Sept 24, 2026, 10:00–14:00 ET.** Presenter‑led (one presenter) with **DSAs as TAs** for Q&A; no GM‑side presentations (packed week). Optional: a GM SME introduces "here's how this applies to our teams" live.
+- **2 hours, no scheduled break** (GMF session; date TBD). Presenter‑led (one presenter) with **DSAs as TAs** for Q&A; no GM‑side presentations (packed week). Optional: a GM SME introduces "here's how this applies to our teams" live.
 - **Hands‑on is the priority.** Everyone runs the **same notebooks together** so results are consistent; also **show the UI** so click‑oriented users see both paths.
 - **Domain SMEs matter.** The most valuable agents come from builders collaborating with subject‑matter experts who supply domain logic — and from pushing calculations **into the data/semantic layer** rather than asking Genie to compute them on the fly.
 
@@ -35,22 +37,20 @@ The point of the session is **not** "add tables to Genie and watch it do magic."
 
 Genie **augments** dashboards; it doesn't replace them. Don't push users to re‑ask the same deterministic question repeatedly — that doesn't scale.
 
-## 4. Agenda (4 hours) — `H` hands‑on · `T` talk · `D` demo
+## 4. Agenda (2 hours) — `H` hands‑on · `T` talk · `D` demo
 
-| Segment | Fmt | Notebook / asset |
-|---|---|---|
-| Orient · Genie **Agents vs Code vs One** · positioning vs BI dashboards (when to use what) | T | slides |
-| How agents work (compound AI system) · best practices · **data foundations & adoption** message | T | slides |
-| **Start with clean data** — gold layer, 3–7 focused tables | H | `01`, `02` |
-| **Build your baseline agent** — programmatically **and** in the UI | H | `03` |
-| **Metric views** as the governed semantic layer (+ metric-view agent) | H | `03b` |
-| *Break* | | |
-| **Knowledge Store** — synonyms, joins, measures, filters, fields, example SQL, minimal instructions | H | `04` |
-| **Evaluate with Benchmarks** + Monitoring & **consumer feedback actions** | H | `05`, `10` |
-| *Break* | | |
-| **Ask your own questions** in the agent | H | `06` |
-| **What's new/next:** iframe embed (GA) · Conversation API · Genie One in Slack/Teams · mobile app · Genie Workbench · multi‑agent orchestration | T/D | slides + snippets |
-| **Demo:** baseline vs. Knowledge‑Store‑curated vs. metric‑view agent · **Q&A** | D | `08` (3‑way) |
+| Time | Segment | Fmt | Notebook / asset |
+|---|---|---|---|
+| 0:00–0:10 | Orient · when to use a Genie Agent vs. a BI dashboard · **curation earns trust** message (incl. metric views as a concept, no hands‑on) | T | slides |
+| 0:10–0:25 | **Config + clean data:** check catalog/schema, load 7 tables, comments + functions | H | `00`, `01`, `02` |
+| 0:25–0:40 | **Build your baseline agent** — programmatically **and** in the UI; try the canonical questions | H | `03` |
+| 0:40–1:10 | **Knowledge Store:** synonyms, joins, measures, filters, fields, example SQL, minimal instructions | H | `04` |
+| 1:10–1:30 | **Evaluate with Benchmarks:** push to both agents, run in the UI, accept snippets / update ground truth | H | `05` |
+| 1:30–1:45 | **Ask your own questions** in the Knowledge Store agent; consumer feedback (thumbs / request review) | H | `06` |
+| 1:45–1:55 | **Proof:** Baseline vs. Knowledge Store on 4 unseen questions | D/H | `08` |
+| 1:55–2:00 | Wrap‑up · what's next · Q&A · delete your agents | T | — |
+
+**If you're running behind:** skip the optional "Update instructions programmatically" cell in `05`. In `06`, have attendees ask two or three questions instead of the full list. If needed, the presenter can run `08` as a demo instead of everyone running it.
 
 ---
 
@@ -146,25 +146,16 @@ serialized_space = {
 
 ---
 
-## 6. Repo build backlog
+## 6. GMF version — what changed vs. `main`
 
-**Done (critical path):**
-1. ✅ **Knowledge Store notebook** (`04`) — measures / filters / fields / joins / synonyms / hidden columns / example SQL built programmatically via `serialized_space` v2 (schema confirmed from the Genie Workbench source; includes a local constraint validator).
-2. ✅ **Metric view + metric‑view agent** (`03b`) — `mv_line_quality` with pinned joins/KPIs, plus a Genie agent on top.
-3. ✅ **3‑way comparison** (`08`) — baseline vs. Knowledge‑Store vs. metric‑view, reusing the benchmark scorer.
-4. ✅ **Trimmed the monolithic blob** — `03` is now a lean baseline; the logic lives in `04`'s structured components; minimal text instructions (clarification + formatting only).
-5. ✅ **Agent model + renumber** — three agents (baseline/metric‑view/knowledge‑store) via a shared idempotent `save_config_keys`; notebooks renumbered `04→05 … 12→13`, cross‑refs swept; cleanup (`13`) deletes all agents + the metric view.
-
-**Remaining (pass 2):**
-6. `05` benchmarks: add the blog's **progressive‑accuracy narrative** (0→54→77→100%) + LLM‑judge / Agent‑mode note.
-7. `10` monitoring: **consumer‑feedback loop** (Yes / Fix it / Request review, "Analyze Space Usage"); soften the no‑native‑alerts claim.
-8. **"When to use Genie vs. dashboard"** markdown in `00` + recap in `06`.
-9. **iframe‑embedding** mini‑guide (GA); tighten Conversation API usage to the 5.9 cadence.
-10. **SKILL.md** benchmark‑API self‑contradiction fix; verify skill against the confirmed schema.
+- **Kept:** `00`, `01`, `02`, `03`, `04`, `05`, `06`, `08`.
+- **Removed:** `03b` metric views, `07` Genie Code skills (and `skill/`), `09` security, `10` monitoring, `11` CI/CD, `12` cleanup.
+- **Two agents, not three:** `05` pushes a single 10‑question suite to the Baseline and Knowledge Store agents. The metric‑view suite and the 4‑question smoke test are gone, because `08` covers that comparison. `08` is now a two‑way compare.
+- **GMF environment (from GMF's suggested corrections):** the default catalog is `containerunitycatalog` and the schema defaults to the login name. `01`/`02` backtick‑quote the schema in `CREATE SCHEMA` / `CREATE VOLUME` / `USE SCHEMA`.
 
 ## 7. Open items to confirm
 - **Live `serialized_space` dump** from a UI‑curated agent — the `04` builder targets the Workbench‑confirmed shape; verify field-for-field against a real dump (`GET …?include_serialized_space=true`) before the session and reconcile if anything differs.
-- **Verify metric‑view DDL** (`CREATE VIEW … WITH METRICS LANGUAGE YAML`) and the `MEASURE()` query syntax in the target workspace version.
+- **Confirm GMF schema naming:** check that each participant's schema in `containerunitycatalog` matches their login (e.g. `ashish_arun`), or tell attendees which name to put in the Schema widget.
 - **Registration list pending** (from the coordinator) → confirms the audience mix; **finance** is the notable interested function. If one function dominates, add a tailored example; otherwise keep manufacturing.
 - **Entitlements confirmed** for all registrants (sandbox + workspace + SQL + consumer) — the entitlements/platform team to verify against the list; see `PREREQUISITES.md`. Prework text has already been broadcast to registrants.
 - Optional **SME live use‑case intro** slot ("here's how this applies to our teams").
