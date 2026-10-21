@@ -25,7 +25,7 @@
      notebooks/     ← workshop notebooks (00–06, 08)
      templates/     ← Genie Agent configuration
    ```
-3. **Open `00_workshop_config`** and check the **catalog** (`containerunitycatalog`) and **schema** (defaults to your login name). If your schema has a different name, change the **Schema** widget.
+3. **Open `00_workshop_config`** and check the **catalog** (`containerunitycatalog`) and **schema** (defaults to your login name). If your schema has a different name, set `SCHEMA_OVERRIDE = "your_schema"` in its first code cell (not the Schema widget, which doesn't carry over to the other notebooks).
 
 ## During & after the session
 - You'll create Genie Agents and supporting tables in **your own sandbox**.

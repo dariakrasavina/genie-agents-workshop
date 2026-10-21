@@ -155,7 +155,7 @@ serialized_space = {
 
 ## 7. Open items to confirm
 - **Live `serialized_space` dump** from a UI‑curated agent — the `04` builder targets the Workbench‑confirmed shape; verify field-for-field against a real dump (`GET …?include_serialized_space=true`) before the session and reconcile if anything differs.
-- **Confirm GMF schema naming:** check that each participant's schema in `containerunitycatalog` matches their login (e.g. `ashish_arun`), or tell attendees which name to put in the Schema widget.
+- **Confirm GMF schema naming:** check that each participant's schema in `containerunitycatalog` matches their login (e.g. `ashish_arun`), or tell attendees which name to put in `SCHEMA_OVERRIDE` in `00` (not the Schema widget — it doesn't carry over to other notebooks). Also confirm whether participants have `CREATE SCHEMA` on the catalog; `01`/`02` tolerate not having it as long as the schema already exists.
 - **Registration list pending** (from the coordinator) → confirms the audience mix; **finance** is the notable interested function. If one function dominates, add a tailored example; otherwise keep manufacturing.
 - **Entitlements confirmed** for all registrants (sandbox + workspace + SQL + consumer) — the entitlements/platform team to verify against the list; see `PREREQUISITES.md`. Prework text has already been broadcast to registrants.
 - Optional **SME live use‑case intro** slot ("here's how this applies to our teams").

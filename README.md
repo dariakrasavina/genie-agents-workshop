@@ -50,7 +50,7 @@ See **`PREREQUISITES.md`** for the full checklist. In short: a Databricks worksp
      templates/        ← Genie agent configuration (reference)
    ```
 
-2. Open **`00_workshop_config`** and check your **catalog** and **schema**. The defaults are `containerunitycatalog` and a schema named after your login (e.g. `ashish.arun@…` → `ashish_arun`). Change the widget if your schema has a different name.
+2. Open **`00_workshop_config`** and check your **catalog** and **schema**. The defaults are `containerunitycatalog` and a schema named after your login (e.g. `ashish.arun@…` → `ashish_arun`). If your schema has a different name, set `SCHEMA_OVERRIDE` in 00's first code cell (the Schema widget doesn't carry over to the other notebooks).
 
 3. Run notebooks **01 → 06**, then **08**, in order. Every notebook reads your config
    automatically via `%run ./00_workshop_config`.
@@ -134,7 +134,7 @@ All notebooks run on **Serverless** compute. Classic clusters with Unity Catalog
 | Symptom | Fix |
 |---------|-----|
 | Notebook 03 / 04 fails to create an agent | Check Genie entitlement, SQL warehouse availability, and API permissions. |
-| `CREATE SCHEMA` / permission errors in 01 | Your schema in `containerunitycatalog` may be named differently from your login — set the **Schema** widget in 00 to the schema you were given. |
+| "Schema … doesn't exist and you can't create it" in 01/02 | Your schema in `containerunitycatalog` is named differently from your login. Set `SCHEMA_OVERRIDE` in 00 to the schema you were given, then re-run 01. |
 | Wrong catalog in Genie answers | Ensure notebook 00 has the same catalog/schema you used in 01–02. |
 | Benchmarks in wrong UI tab | Notebook 05 pushes benchmarks inside `serialized_space.benchmarks` (the GA API), so they land in the Benchmarks tab. |
 
