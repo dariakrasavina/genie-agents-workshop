@@ -60,7 +60,7 @@ See **`PREREQUISITES.md`** for the full checklist. In short: a Databricks worksp
      skill/            ← Genie Code skill file
    ```
 
-2. Open **`00_workshop_config`** and set your **catalog** and **schema**.
+2. Open **`00_workshop_config`** and set your **catalog** and **schema** on the `CATALOG_OVERRIDE` / `SCHEMA_OVERRIDE` lines in its first code cell (not the widgets, which don't carry over to the other notebooks).
 
 3. Run notebooks **01 → 12** in order. Every notebook reads your config
    automatically via `%run ./00_workshop_config`.

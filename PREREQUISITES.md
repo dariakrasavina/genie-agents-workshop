@@ -26,7 +26,7 @@
      templates/     ← Genie Agent configuration
      skill/         ← Genie Code skill file
    ```
-3. **Open `00_workshop_config`** and set your **catalog** and **schema** (a sandbox catalog/schema you can write to).
+3. **Open `00_workshop_config`** and set your **catalog** and **schema** (a sandbox catalog/schema you can write to) on the `CATALOG_OVERRIDE` / `SCHEMA_OVERRIDE` lines in its first code cell. Don't type them into the widgets; those don't carry over to the other notebooks.
 
 ## During & after the session
 - You'll create Genie Agents and supporting tables in **your own sandbox**.
